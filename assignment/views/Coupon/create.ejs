@@ -1,0 +1,96 @@
+<div class="container">
+  <form action="/Coupon/create" method="POST">
+    <div class="row">
+      <div class="form-group col-12 col-sm-6 col-md- col-lg-6 col-xl-6">
+        <div>
+          <label>Title:</label>
+          <input type="text" class="form-control" name="Coupon[title]" required>
+        </div>
+        <div>
+          <label>Restaurant:</label>
+          <input type="text" class="form-control" name="Coupon[restaurant]" required>
+        </div>
+        <div>
+          <label>District:</label>
+          <select class="form-control" name="Coupon[district]" onchange="districtSelected(this.value)" required>
+            <option value="">Please select the district:</option>
+            <option value="HK Island">HK Island</option>
+            <option value="Kowloon">Kowloon</option>
+            <option value="New Territories">New Territories</option>
+          </select>
+        </div>
+        <div>
+          <label>Mall:</label>
+          <select class="form-control" id='mall' name="Coupon[mall]" disabled required>
+          </select>
+        </div>
+        <div>
+          <label>Image:</label>
+          <input type="url" class="form-control" name="Coupon[image]">
+        </div>
+      </div>
+
+      <div class="form-group col-12 col-sm-6 col-md- col-lg-6 col-xl-6">
+        <div>
+          <label>Coin:</label>
+          <input type="number" class="form-control" name="Coupon[coin]" min=0 required>
+        </div>
+        <div>
+          <label>Deal Valid Till:</label>
+          <input data-provide="datepicker" type="text" class="datepicker form-control" date-date-format="mm/dd/yyyy" name="Coupon[date]" required>
+        </div>
+        <div>
+          <label>Quota:</label>
+          <input type="number" class="form-control" name="Coupon[quota]" min=0 required>
+        </div>
+        <div>
+          <label>Details:</label>
+          <textarea type="text" class="form-control" name="Coupon[details]" rows="4"></textarea>
+        </div>
+      </div>
+
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+
+<script>
+  const hk_mall = ["IFC", "金鐘太古廣場", "時代廣場", "銅鑼灣世貿中心", "太古城中心", "杏花新城商場", "數碼港商場"];
+  const kn_mall = ["圓方", "Elements", "Harbour City", "海港城", "美麗華商場", "黃埔新天地", "又一城", "朗豪坊商場", "新世紀廣場", "奧海城", "MegaBox", "德福廣場商場", "荷里活廣場", "APM"];
+  const nt_mall = ["荃新天地", "荃灣廣場", "悅來坊商場", "綠楊坊商場", "新都會廣場", "青衣城商場", "屯門市廣場",
+    "東港城", "君薈坊商場", "連理街", "沙田新城市廣場", "大埔超級城"
+  ];
+
+
+  function districtSelected(value) {
+    let mallSelect = document.getElementById("mall");
+    mallSelect.options.length = 0;
+    if (value == "HK Island") {
+      hk_mall.forEach(function (item) {
+        var option = document.createElement("option");
+        option.text = item;
+        option.value = item;
+        mallSelect.add(option);
+        mallSelect.disabled = false;
+      });
+    } else if (value == "Kowloon") {
+      kn_mall.forEach(function (item) {
+        var option = document.createElement("option");
+        option.text = item;
+        option.value = item;
+        mallSelect.add(option);
+        mallSelect.disabled = false;
+      });
+    } else if (value == "New Territories") {
+      nt_mall.forEach(function (item) {
+        var option = document.createElement("option");
+        option.text = item;
+        option.value = item;
+        mallSelect.add(option);
+        mallSelect.disabled = false;
+      });
+    } else {
+      mallSelect.disabled = true;
+    }
+  }
+</script>

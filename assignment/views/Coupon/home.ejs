@@ -1,0 +1,93 @@
+<style>
+  .card-img-top {
+    width: 100%;
+    height: 263px;
+    object-fit: cover;
+  }
+</style>
+
+<div class="container">
+  <div class="row">
+    <!-- column 1 -->
+    <div class="col-12 col-sm-6 col-md- col-lg-4 col-xl-4">
+      <p>HK Island</p>
+      <% for (var key in hk_coupons) { %>
+        <div class="card">
+          <a href="/Coupon/detail/<%= hk_coupons[key].id %>">
+            <img class="card-img-top img-fluid img-thumbnail" src=<%=hk_coupons[key].image%>>
+          </a>
+          <div class="card-body">
+            <h5 class="card-title">
+              <b>
+                <a href="/Coupon/detail/<%= hk_coupons[key].id %>">
+                  <%=hk_coupons[key].restaurant%>
+                </a>
+              </b>
+            </h5>
+            <p>
+              <%=hk_coupons[key].title%>
+            </p>
+            <p>Coins:
+              <%=hk_coupons[key].coin%>
+            </p>
+          </div>
+        </div>
+        <% } %>
+    </div>
+
+    <!-- column 2 -->
+    <div class="col-12 col-sm-6 col-md- col-lg-4 col-xl-4">
+      <p>Kowloon</p>
+      <% for (var key in kn_coupons) { %>
+        <div class="card">
+            <a href="/Coupon/detail/<%= kn_coupons[key].id %>">
+              <img class="card-img-top img-fluid img-thumbnail" src=<%=kn_coupons[key].image%>>
+            </a>
+            <div class="card-body">
+              <h5 class="card-title">
+                <b>
+                  <a href="/Coupon/detail/<%= kn_coupons[key].id %>">
+                    <%=kn_coupons[key].restaurant%>
+                  </a>
+                </b>
+              </h5>
+              <p>
+                <%=kn_coupons[key].title%>
+              </p>
+              <p>Coins:
+                <%=kn_coupons[key].coin%>
+              </p>
+            </div>
+          </div>
+        <% } %>
+    </div>
+
+    <!-- column 3 -->
+    <div class="col-12 col-sm-6 col-md- col-lg-4 col-xl-4">
+
+      <p>New Territories</p>
+      <% for (var key in nt_coupons) { %>
+        <div class="card">
+            <a href="/Coupon/detail/<%= nt_coupons[key].id %>">
+              <img class="card-img-top img-fluid img-thumbnail" src=<%=nt_coupons[key].image%>>
+            </a>
+            <div class="card-body">
+              <h5 class="card-title">
+                <b>
+                  <a href="/Coupon/detail/<%= nt_coupons[key].id %>">
+                    <%=nt_coupons[key].restaurant%>
+                  </a>
+                </b>
+              </h5>
+              <p>
+                <%=nt_coupons[key].title%>
+              </p>
+              <p>Coins:
+                <%=nt_coupons[key].coin%>
+              </p>
+            </div>
+          </div>
+        <% } %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+<style>
+  .card-img-top {
+    width: 100%;
+    height: 263px;
+    object-fit: cover;
+  }
+</style>
+
+<div class="container">
+  <div class="row">
+  <h5 class="col-12 col-sm-6 col-md- col-lg-4 col-xl-4">My coupons</h5>
+  <div class="col-12 col-sm-6 col-md- col-lg-4 col-xl-4"></div>
+  <h5 class="col-12 col-sm-6 col-md- col-lg-4 col-xl-4">Account Balance: <%= coins %> coins.</h5>
+</div>
+  <div class="row">
+    <% for (var key = 0; key < coupons.length; key++) { %>
+
+      <div class="col-12 col-sm-6 col-md- col-lg-4 col-xl-4">
+        <div class="card">
+          <a href="/Coupon/detail/<%= coupons[key].id %>">
+            <img class="card-img-top img-fluid img-thumbnail" src=<%=coupons[key].image%>>
+          </a>
+          <div class="card-body">
+            <h5 class="card-title">
+              <b>
+                <a href="/Coupon/detail/<%= coupons[key].id %>">
+                  <%=coupons[key].restaurant%>
+                </a>
+              </b>
+            </h5>
+            <p>
+              <%=coupons[key].title%>
+            </p>
+            <p>Expiry Date:
+              <%=coupons[key].date%>
+            </p>
+          </div>
+        </div>
+      </div>
+      <% } %>
+  </div>
+</div>

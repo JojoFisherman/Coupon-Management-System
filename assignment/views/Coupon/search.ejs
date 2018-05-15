@@ -1,0 +1,127 @@
+<style>
+  .card-img-top {
+    width: 100%;
+    height: 263px;
+    object-fit: cover;
+  }
+</style>
+<div class="container">
+  <form action="/Coupon/search/" method="POST" id="search_form">
+    <!-- thumbnail and paginate -->
+    <div class="row">
+      <div class="col-12 col-sm-8">
+        <% if (coupons != undefined){ %>
+          <div>
+
+            <div class="row">
+              <% for (var key in coupons) { %>
+                <div class="col-12 col-sm-6">
+                  <div class="card">
+                    <a href="/Coupon/detail/<%= coupons[key].id %>">
+                      <img class="card-img-top img-fluid img-thumbnail" src=<%=coupons[key].image%>>
+                      <p>
+                        <%=coupons[key].restaurant%>
+                      </p>
+                    </a>
+                    <p>
+                      <%=coupons[key].title%>
+                    </p>
+                    <p>Coins:
+                      <%=coupons[key].coin%>
+                    </p>
+                  </div>
+                </div>
+                <% } %>
+            </div>
+
+          </div>
+
+          <div>
+            <% const current = Number(req.query.page || 1); %>
+              <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                  <li class="page-item">
+                    <!-- <a class="page-link" href="/coupon/search/?page=<%= Math.max(current-1, 1) %>">Previous</a> -->
+                    <a class="page-link" href="#" onclick="changePage('<%= Math.max(current-1, 1) %>')">Previous</a>
+                  </li>
+
+                  <% for (i = 1; i <= count; i++) { %>
+                    <li class="page-item">
+                      <!-- <a class="page-link" href="/coupon/search/?page=<%= i %>"> -->
+                      <a class="page-link" href="#" onclick="changePage('<%= i %>')">
+                        <%= i %>
+                      </a>
+                    </li>
+                    <% } %>
+
+                      <li class="page-item">
+                        <!-- <a class="page-link" href="/coupon/search/?page=<%= Math.min(current+1, count) %>">Next</a> -->
+                        <a class="page-link" href="#" onclick="changePage('<%= Math.min(current+1, count) %>')">Next</a>
+                      </li>
+                </ul>
+              </nav>
+
+          </div>
+          <% } %>
+      </div>
+
+
+
+      <div class="form-group col-12 col-sm-4">
+        <div>
+          <label>District:</label>
+          <select id="district" class="form-control" name="Coupon[district]">
+            <option value="All Districts" <%=( selected!=undefined && selected.district=='All Districts' )? 'selected': '' %>>All Districts</option>
+            <option value="HK Island" <%=( selected!=undefined && selected.district=='HK Island' )? 'selected': '' %> >HK Island</option>
+            <option value="Kowloon" <%=( selected!=undefined && selected.district=='Kowloon' )? 'selected': '' %>>Kowloon</option>
+            <option value="New Territories" <%=( selected!=undefined && selected.district=='New Territories' )? 'selected': '' %>>New Territories</option>
+          </select>
+        </div>
+        <div>
+          <label>Coins Range:</label>
+          <input type="text" id="coin_range" class="form-control">
+          <input type="hidden" id="coin_high" name="Coupon[coin_high]" class="form-control" value="<%= (selected!=undefined)?selected.coin_high:10000 %>">
+          <input type="hidden" id="coin_low" name="Coupon[coin_low]" class="form-control" value="<%= (selected!=undefined)?selected.coin_low:10 %>">
+        </div>
+        <div>
+          <label>valid before:</label>
+          <input id="date" data-provide="datepicker" type="text" class="datepicker form-control" date-date-format="mm/dd/yyyy" name="Coupon[date]"
+            value="<%= (selected!=undefined)?selected.date:'' %>">
+        </div>
+        <button id="submit_button" type="submit" class="btn btn-primary" onmouseover="getValue()">Submit</button>
+
+      </div>
+    </div>
+  </form>
+</div>
+
+
+
+
+<script>
+  function changePage(value) {
+    console.log('the page number on parameter:' + value);
+    var search_form = document.getElementById('search_form');
+    search_form.action = ('/coupon/search/?page=' + value);
+    document.getElementById('submit_button').click();
+  }
+
+  function getValue() {
+
+    // Saving it's instance to var
+    var slider = $("#coin_range").data("ionRangeSlider");
+
+    // Get values
+    var from = slider.result.from;
+    var to = slider.result.to;
+
+    var coin_high = document.getElementById('coin_high');
+    var coin_low = document.getElementById('coin_low');
+
+    coin_high.value = to;
+    coin_low.value = from;
+
+
+
+  }
+</script>

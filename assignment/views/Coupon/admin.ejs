@@ -1,0 +1,60 @@
+<div class='container'>
+  <div class="row">
+    <table class='col-12 col-sm- col-md- col-lg- col-xl- table table-striped table-hover'>
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Restaurant</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+
+      <% coupons.forEach(function(coupon){ %>
+        <tr>
+          <td>
+            <%= coupon.id %>
+          </td>
+          <td>
+            <%= coupon.title %>
+          </td>
+          <td>
+            <%= coupon.restaurant %>
+          </td>
+          <td>
+            <a href="/Coupon/update/<%= coupon.id %>">Update</a>
+          </td>
+          <td>
+            <a href="#" onclick="deleteCoupon('<%= coupon.id %>')">Delete</a>
+          </td>
+          <td>
+            <a href="/Coupon/members/<%= coupon.id %>">Members</a>
+          </td>
+        </tr>
+        <% }); %>
+    </table>
+  </div>
+</div>
+
+<script>
+  function deleteCoupon(id) {
+
+    var r = confirm("Confirm Delete?");
+    if (r == true) {
+
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "/coupon/delete/" + id, true);
+      xhr.onload = function (e) {
+        alert(xhr.responseText);
+        if (xhr.responseText == "Coupon Deleted") {
+          window.location = "/coupon/admin";
+        }
+      };
+      xhr.send();
+
+    } else {
+      alert("cancelled");
+    }
+
+  } 
+</script>

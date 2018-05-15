@@ -1,0 +1,25 @@
+<div class='container'>
+  <div class="row">
+    <table class='col-12 col-sm- col-md- col-lg- col-xl- table table-striped table-hover'>
+      <tr>
+        <th>Name</th>
+        <th>ID</th>
+        <th>Coins</th>
+      </tr>
+
+      <% members.forEach(function(member){ %>
+        <tr>
+          <td>
+            <%= member.username %>
+          </td>
+          <td>
+            <%= member.id %>
+          </td>
+          <td>
+            <%= member.coins %>
+          </td>
+        </tr>
+        <% }); %>
+    </table>
+  </div>
+</div>

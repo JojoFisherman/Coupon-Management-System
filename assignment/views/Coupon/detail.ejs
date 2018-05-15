@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="row">
+    <img class="col-12 col-sm-6" height="296" src="<%= coupon.image%>">
+    <ul class="list-group col-12 col-sm-6 ">
+      <li class='list-group-item'>
+        <%= coupon.restaurant%>
+      </li>
+      <li class='list-group-item'>
+        <%= coupon.title%>
+      </li>
+      <li class='list-group-item'>coins:
+        <%= coupon.coin%>
+      </li>
+      <li class='list-group-item'>address:
+        <%= coupon.mall%>,
+          <%= coupon.district%>
+      </li>
+      <li class='list-group-item'>Valid Till:
+        <%= coupon.date%>
+      </li>
+      <li class='list-group-item'>
+        <%= coupon.details%>
+      </li>
+    </ul>
+    <% if (redeemed === false && typeof req.session.username !== 'undefined' && req.session.username !== 'admin' && coupon.quota > 0) { %>
+      <div class="col-12 col-sm-6"></div>
+      <div class="col-12 col-sm-6">
+        <form action='/user/redeem' method="POST" onsubmit="return submitForm(this);">
+          <input type="hidden" name="id" value="<%= coupon.id %>"></input>
+          <input type="hidden" name="coin" value="<%= coupon.coin %>"></input>
+          <button type="submit" class="btn btn-primary">Redeem</button>
+        </form>
+      </div>
+      <% } %>
+  </div>
+</div>
+
+
+
+<script>
+  function submitForm(oFormElement) {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+      alert(xhr.responseText);
+      if (xhr.responseText == "redeemed successfully.") {
+        window.location = "/";
+      }
+    }
+
+    xhr.open(oFormElement.method, oFormElement.action, true);
+    xhr.send(new FormData(oFormElement));
+    return false;
+  }
+</script>
