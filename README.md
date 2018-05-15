@@ -1,3 +1,1 @@
-# cs-web-system-2018-JojoFisherman
-Kwan Wai Chung
-15219666
+A web page using Sailsjs framework and Bootstrap
